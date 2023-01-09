@@ -1,0 +1,568 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://NPC/NPC.gd" type="Script" id=2]
+[ext_resource path="res://NPC/2.png" type="Texture" id=3]
+[ext_resource path="res://psx.shader" type="Shader" id=4]
+[ext_resource path="res://Kitchen/kitchen.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Studio/studio.tscn" type="PackedScene" id=6]
+[ext_resource path="res://WC/WC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Fonts/VT323-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://NPC/1.png" type="Texture" id=9]
+[ext_resource path="res://NPC/3.png" type="Texture" id=10]
+[ext_resource path="res://NPC/4.png" type="Texture" id=11]
+[ext_resource path="res://NPC/5.png" type="Texture" id=12]
+[ext_resource path="res://NPC/6.png" type="Texture" id=13]
+[ext_resource path="res://NPC/7.png" type="Texture" id=14]
+[ext_resource path="res://NPC/8.png" type="Texture" id=15]
+[ext_resource path="res://Studio/look_down.png" type="Texture" id=16]
+[ext_resource path="res://Sounds/office.mp3" type="AudioStream" id=17]
+[ext_resource path="res://Sounds/dream.mp3" type="AudioStream" id=18]
+[ext_resource path="res://Sounds/end.mp3" type="AudioStream" id=19]
+[ext_resource path="res://Sounds/die.mp3" type="AudioStream" id=20]
+
+[sub_resource type="Animation" id=33]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/WorldEnvironment:environment:fog_depth_end")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 35.0 ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "Win"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/WorldEnvironment:environment")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/WorldEnvironment:environment:fog_depth_end")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 35.0, 0.2 ]
+}
+
+[sub_resource type="Environment" id=15]
+background_mode = 1
+background_color = Color( 0.501961, 0.6, 0.701961, 1 )
+ambient_light_color = Color( 0.54902, 0.54902, 0.54902, 1 )
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0.501961, 0.6, 0.701961, 1 )
+fog_depth_begin = 0.0
+fog_depth_end = 35.0
+fog_depth_curve = 3.73213
+tonemap_mode = 2
+tonemap_exposure = 0.7
+auto_exposure_speed = 64.0
+glow_enabled = true
+glow_strength = 0.97
+glow_bloom = 1.0
+
+[sub_resource type="DynamicFont" id=18]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=19]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=32]
+size = 21
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
+
+[sub_resource type="CylinderShape" id=7]
+radius = 0.2
+
+[sub_resource type="CylinderMesh" id=8]
+top_radius = 0.2
+bottom_radius = 0.2
+
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 20, 0.2, 20 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 10, 0.1, 10 )
+
+[sub_resource type="NavigationMesh" id=10]
+vertices = PoolVector3Array( 2.9442, -4.1404, -18.1891, 2.9442, -4.1404, -18.9391, 2.1942, -4.1404, -19.1891, 2.4442, -4.1404, -17.4391, 2.9442, -4.1404, -18.1891, 2.1942, -4.1404, -19.1891, 1.4442, -4.1404, -19.4391, 0.194201, -4.1404, -18.4391, -0.305799, -3.8904, -17.1891, -1.5558, -4.1404, -19.1891, -1.5558, -4.1404, -18.6891, 0.194201, -4.1404, -18.4391, 1.4442, -4.1404, -19.4391, 1.9442, -4.1404, -23.4391, 1.1942, -4.1404, -23.4391, 1.4442, -4.1404, -19.4391, 2.1942, -4.1404, -19.1891, -2.8058, -4.1404, -4.6891, -1.8058, -3.8904, -5.1891, -2.8058, -4.1404, -5.4391, -0.555799, -3.6404, -6.4391, 0.194201, -3.6404, -6.4391, -0.0557985, -3.6404, -7.4391, -0.555799, -3.6404, -7.4391, 5.4442, -4.1404, -0.939104, 4.4442, -4.1404, -1.4391, 3.6942, -4.1404, -0.939104, -1.3058, -3.6404, -8.4391, -1.3058, -3.3904, -7.4391, -0.555799, -3.6404, -7.4391, -6.3058, -4.1404, -9.1891, -7.3058, -3.6404, -9.1891, -7.0558, -4.1404, -7.9391, -7.0558, -4.1404, -7.9391, -7.8058, -4.1404, -7.9391, -7.5558, -4.1404, -6.4391, -5.8058, -4.1404, -6.1891, -1.3058, -3.6404, -8.4391, -0.555799, -3.6404, -7.4391, -0.0557985, -3.6404, -7.4391, 0.194201, -3.6404, -8.9391, -0.555799, -3.6404, -9.6891, 1.1942, -3.6404, -7.6891, 1.6942, -3.6404, -8.6891, 0.194201, -3.6404, -8.9391, -0.0557985, -3.6404, -7.4391, -6.3058, -4.1404, -9.1891, -7.0558, -4.1404, -7.9391, -5.8058, -4.1404, -6.1891, -4.5558, -4.1404, -4.9391, -2.8058, -4.1404, -5.4391, -2.3058, -3.8904, -8.4391, -4.0558, -4.1404, -0.939104, -3.0558, -4.1404, 0.0608959, -2.3058, -4.1404, -0.439104, 2.1942, -4.1404, -0.439104, 5.4442, -4.1404, -0.939104, 3.6942, -4.1404, -0.939104, -1.8058, -4.1404, -13.6891, -2.8058, -4.1404, -13.6891, -3.0558, -4.1404, -12.6891, -2.3058, -3.8904, -11.1891, -1.3058, -4.1404, -0.439104, -2.5558, -4.1404, -0.939104, -4.0558, -4.1404, -0.939104, -2.3058, -4.1404, -0.439104, -4.5558, -4.1404, -4.9391, -4.5558, -4.1404, -3.4391, -4.0558, -4.1404, -3.1891, -2.8058, -4.1404, -4.6891, -2.8058, -4.1404, -5.4391, -2.3058, -3.8904, -8.4391, -1.3058, -3.6404, -8.4391, -0.555799, -3.6404, -9.6891, -0.555799, -3.6404, -10.9391, -2.3058, -3.8904, -11.1891, -4.8058, -3.8904, -0.439104, -4.8058, -4.1404, 2.8109, -4.3058, -4.1404, 2.3109, -3.0558, -4.1404, 0.0608959, -4.0558, -4.1404, -0.939104, -2.5558, -4.1404, -0.939104, -2.8058, -4.1404, -4.6891, -4.0558, -4.1404, -3.1891, -4.0558, -4.1404, -0.939104, -6.0558, -2.6404, -2.4391, -5.5558, -2.6404, -2.9391, -5.5558, -3.8904, -4.9391, -5.8058, -4.1404, -6.1891, -0.805799, -4.1404, 0.310896, 1.9442, -4.1404, 0.310896, 2.1942, -4.1404, -0.439104, -1.3058, -4.1404, -0.439104, -5.8058, -4.1404, -6.1891, -5.5558, -3.8904, -4.9391, -4.5558, -4.1404, -4.9391, -4.3058, -4.1404, 2.3109, -3.0558, -4.1404, 2.3109, -3.0558, -4.1404, 0.0608959, -6.8058, -4.1404, -12.9391, -7.0558, -4.1404, -11.4391, -6.3058, -4.1404, -9.1891, -2.3058, -3.8904, -8.4391, -2.3058, -3.8904, -11.1891, -3.0558, -4.1404, -12.6891, 4.6942, -4.1404, -4.1891, 4.1942, -4.1404, -3.4391, 4.4442, -4.1404, -1.4391, 5.4442, -4.1404, -0.939104, 2.1942, -4.1404, -0.439104, 3.6942, -4.1404, -0.939104, -2.5558, -4.1404, -0.939104, -1.3058, -4.1404, -0.439104, 0.944201, -2.6404, -9.9391, 1.9442, -2.3904, -9.9391, 1.9442, -2.3904, -10.9391, 0.694201, -2.6404, -10.9391, 4.9442, -2.6404, -10.1891, 4.9442, -2.6404, -10.6891, 4.1942, -2.6404, -10.9391, 2.9442, -2.3904, -10.6891, 2.9442, -2.3904, -9.9391, 4.6942, -3.6404, -8.9391, 2.9442, -3.6404, -8.9391, 4.4442, -3.6404, -8.4391, 4.9442, -3.6404, -8.1891, 4.6942, -3.6404, -8.9391, 4.4442, -3.6404, -8.4391, 4.4442, -3.3904, -5.9391, 6.1942, -3.6404, -7.6891, 5.9442, -3.6404, -8.4391, 4.9442, -3.6404, -8.1891, 7.6942, -3.6404, -6.6891, 8.4442, -3.6404, -6.9391, 6.1942, -3.6404, -7.6891, 5.6942, -3.8904, -4.6891, 9.4442, -2.1404, -2.6891, 9.1942, -2.1404, -4.6891, 7.6942, -3.1404, -5.6891, 5.6942, -3.6404, -5.4391, 8.1942, -2.3904, -3.35577, 6.1942, -3.6404, -7.6891, 4.9442, -3.6404, -8.1891, 4.4442, -3.3904, -5.9391, 5.6942, -3.6404, -5.4391, 7.6942, -3.1404, -5.6891, 7.6942, -3.6404, -6.6891, 2.6942, -2.8904, -6.9391, 3.4442, -2.8904, -6.9391, 3.4442, -2.8904, -7.4391, 2.6942, -2.8904, -7.4391, 1.4442, -2.8904, -6.6891, 2.1942, -2.8904, -6.1891, 2.6942, -2.8904, -6.9391, 2.6942, -2.8904, -7.4391, 1.6942, -3.1404, -2.1891, 3.1942, -3.3904, -1.9391, 3.1942, -3.3904, -2.6891, 1.6942, -3.1404, -2.6891, 9.1942, -2.1404, 1.8109, 9.1942, -2.1404, 3.5609, 9.6942, -2.1404, 2.0609, 9.1942, -2.1404, 1.8109, 9.6942, -2.1404, 2.0609, 9.4442, -2.1404, 0.810896, 8.6942, -1.8904, 1.0609, 4.1942, -4.1404, 4.3109, 1.4442, -4.1404, 4.5609, 3.6942, -4.1404, 4.8109, 4.9442, -4.1404, 1.5609, 4.4442, -4.1404, 1.5609, 3.9442, -4.1404, 2.0609, 4.6942, -4.1404, 2.5609, 5.4442, -4.1404, 2.8109, 4.4442, -4.1404, 5.8109, 4.6942, -4.1404, 3.8109, 4.1942, -4.1404, 4.3109, 3.6942, -4.1404, 4.8109, 4.4442, -4.1404, 5.8109, 4.1942, -4.1404, 4.3109, 4.6942, -4.1404, 3.8109, 6.9442, -4.1404, 3.0609, 5.4442, -4.1404, 2.8109, 4.6942, -4.1404, 3.8109, 5.4442, -4.1404, 2.8109, 4.6942, -4.1404, 2.5609, 4.1942, -4.1404, 4.3109, -3.8058, -4.1404, 4.0609, -4.5558, -4.1404, 4.5609, -4.3058, -4.3904, 5.0609, -2.8058, -4.1404, 5.0609, -2.5558, -4.1404, 4.5609, 9.1942, -2.1404, 4.5609, 9.6942, -2.1404, 5.0609, 9.6942, -2.1404, 4.0609, -7.0558, -4.1404, 4.5609, -6.5558, -4.1404, 5.3109, -5.5558, -4.1404, 4.8109, 4.1942, -4.1404, 7.0609, 4.1942, -4.1404, 7.5609, 5.1942, -3.8904, 7.0609, 4.4442, -4.1404, 6.0609, 6.1942, -3.8904, 6.5609, 6.1942, -3.8904, 7.3109, 6.6942, -3.8904, 7.3109, 6.6942, -4.1404, 6.5609, -7.5558, -4.1404, 7.5609, -7.5558, -4.1404, 8.3109, -6.3058, -4.1404, 8.3109, -6.3058, -4.1404, 7.3109, 1.4442, -4.1404, 9.0609, 2.6942, -4.1404, 8.5609, 1.9442, -4.1404, 8.0609, 0.444201, -4.1404, 8.8109, 5.1942, -3.1404, 8.5609, 5.1942, -3.1404, 9.3109, 6.4442, -3.1404, 8.8109, 6.1942, -3.3904, 8.3109, 5.1942, -4.1404, 13.3109, 6.1942, -4.1404, 13.5609, 5.6942, -4.1404, 12.8109, 4.6942, -4.1404, 10.8109, 5.1942, -4.1404, 13.3109, 5.6942, -4.1404, 12.8109, 5.9442, -4.1404, 11.0609, 8.9442, -0.390402, 13.5609, 8.4442, -0.140402, 13.5609, 8.4442, 0.109598, 14.0609, 10.6942, -0.140402, 13.0609, 9.1942, -0.140402, 12.8109, 8.9442, -0.390402, 13.5609, 10.6942, 0.109598, 14.8109, 10.6942, -0.140402, 13.0609, 8.9442, -0.390402, 13.5609, 8.4442, 0.109598, 14.0609 )
+polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 4, 3, 5 ), PoolIntArray( 5, 3, 6 ), PoolIntArray( 6, 3, 7 ), PoolIntArray( 7, 3, 8 ), PoolIntArray( 10, 9, 11 ), PoolIntArray( 11, 9, 12 ), PoolIntArray( 14, 13, 15 ), PoolIntArray( 15, 13, 16 ), PoolIntArray( 19, 18, 17 ), PoolIntArray( 23, 22, 20 ), PoolIntArray( 20, 22, 21 ), PoolIntArray( 26, 25, 24 ), PoolIntArray( 29, 28, 27 ), PoolIntArray( 32, 31, 30 ), PoolIntArray( 34, 33, 35 ), PoolIntArray( 35, 33, 36 ), PoolIntArray( 38, 37, 39 ), PoolIntArray( 39, 37, 40 ), PoolIntArray( 40, 37, 41 ), PoolIntArray( 43, 42, 44 ), PoolIntArray( 44, 42, 45 ), PoolIntArray( 47, 46, 48 ), PoolIntArray( 48, 46, 49 ), PoolIntArray( 49, 46, 50 ), PoolIntArray( 50, 46, 51 ), PoolIntArray( 54, 53, 52 ), PoolIntArray( 57, 56, 55 ), PoolIntArray( 59, 58, 60 ), PoolIntArray( 60, 58, 61 ), PoolIntArray( 62, 65, 63 ), PoolIntArray( 63, 65, 64 ), PoolIntArray( 67, 66, 68 ), PoolIntArray( 68, 66, 69 ), PoolIntArray( 69, 66, 70 ), PoolIntArray( 72, 71, 73 ), PoolIntArray( 73, 71, 74 ), PoolIntArray( 74, 71, 75 ), PoolIntArray( 80, 79, 76 ), PoolIntArray( 76, 79, 78 ), PoolIntArray( 76, 78, 77 ), PoolIntArray( 84, 83, 81 ), PoolIntArray( 81, 83, 82 ), PoolIntArray( 86, 85, 87 ), PoolIntArray( 87, 85, 88 ), PoolIntArray( 90, 89, 91 ), PoolIntArray( 91, 89, 92 ), PoolIntArray( 95, 94, 93 ), PoolIntArray( 98, 97, 96 ), PoolIntArray( 100, 99, 101 ), PoolIntArray( 101, 99, 104 ), PoolIntArray( 101, 104, 103 ), PoolIntArray( 101, 103, 102 ), PoolIntArray( 106, 105, 107 ), PoolIntArray( 107, 105, 108 ), PoolIntArray( 112, 111, 109 ), PoolIntArray( 109, 111, 110 ), PoolIntArray( 114, 113, 115 ), PoolIntArray( 115, 113, 116 ), PoolIntArray( 118, 117, 119 ), PoolIntArray( 119, 117, 120 ), PoolIntArray( 120, 117, 121 ), PoolIntArray( 124, 123, 122 ), PoolIntArray( 126, 125, 127 ), PoolIntArray( 127, 125, 128 ), PoolIntArray( 131, 130, 129 ), PoolIntArray( 134, 133, 132 ), PoolIntArray( 139, 138, 135 ), PoolIntArray( 135, 138, 140 ), PoolIntArray( 140, 138, 137 ), PoolIntArray( 140, 137, 136 ), PoolIntArray( 146, 145, 141 ), PoolIntArray( 141, 145, 144 ), PoolIntArray( 141, 144, 143 ), PoolIntArray( 141, 143, 142 ), PoolIntArray( 150, 149, 147 ), PoolIntArray( 147, 149, 148 ), PoolIntArray( 153, 152, 154 ), PoolIntArray( 154, 152, 151 ), PoolIntArray( 158, 157, 155 ), PoolIntArray( 155, 157, 156 ), PoolIntArray( 161, 160, 159 ), PoolIntArray( 165, 164, 162 ), PoolIntArray( 162, 164, 163 ), PoolIntArray( 168, 167, 166 ), PoolIntArray( 170, 169, 171 ), PoolIntArray( 171, 169, 172 ), PoolIntArray( 172, 169, 173 ), PoolIntArray( 176, 175, 174 ), PoolIntArray( 179, 178, 177 ), PoolIntArray( 182, 181, 180 ), PoolIntArray( 184, 183, 185 ), PoolIntArray( 185, 183, 186 ), PoolIntArray( 188, 187, 189 ), PoolIntArray( 189, 187, 190 ), PoolIntArray( 190, 187, 191 ), PoolIntArray( 194, 193, 192 ), PoolIntArray( 197, 196, 195 ), PoolIntArray( 199, 198, 200 ), PoolIntArray( 200, 198, 201 ), PoolIntArray( 205, 204, 202 ), PoolIntArray( 202, 204, 203 ), PoolIntArray( 207, 206, 208 ), PoolIntArray( 208, 206, 209 ), PoolIntArray( 211, 210, 212 ), PoolIntArray( 212, 210, 213 ), PoolIntArray( 217, 216, 214 ), PoolIntArray( 214, 216, 215 ), PoolIntArray( 220, 219, 218 ), PoolIntArray( 223, 222, 224 ), PoolIntArray( 224, 222, 221 ), PoolIntArray( 227, 226, 225 ), PoolIntArray( 230, 229, 228 ), PoolIntArray( 233, 232, 234 ), PoolIntArray( 234, 232, 231 ) ]
+
+[sub_resource type="CubeMesh" id=30]
+size = Vector3( 0.001, 0.5, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=31]
+shader = ExtResource( 4 )
+shader_param/snapRes = 100.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.1
+shader_param/uv_scale = Vector2( 3, 2 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = true
+shader_param/is_black = false
+shader_param/albedoTex = ExtResource( 16 )
+
+[sub_resource type="CubeMesh" id=11]
+size = Vector3( 0.9, 1.782, 0.001 )
+
+[sub_resource type="ShaderMaterial" id=21]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/snapRes = 32.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.1
+shader_param/uv_scale = Vector2( 2.996, 1.988 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = true
+shader_param/is_black = false
+shader_param/albedoTex = ExtResource( 9 )
+
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 0.45, 0.892, 0.013 )
+
+[sub_resource type="BoxShape" id=16]
+extents = Vector3( 1.97579, 1, 1.61319 )
+
+[sub_resource type="ShaderMaterial" id=23]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/snapRes = 32.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.1
+shader_param/uv_scale = Vector2( 2.996, 1.988 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = true
+shader_param/is_black = false
+shader_param/albedoTex = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = ExtResource( 4 )
+shader_param/snapRes = 32.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.1
+shader_param/uv_scale = Vector2( 3, 2 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = true
+shader_param/is_black = false
+shader_param/albedoTex = ExtResource( 10 )
+
+[sub_resource type="ShaderMaterial" id=25]
+shader = ExtResource( 4 )
+shader_param/snapRes = 32.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.1
+shader_param/uv_scale = Vector2( 3, 2 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = true
+shader_param/is_black = false
+shader_param/albedoTex = ExtResource( 11 )
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 4 )
+shader_param/snapRes = 32.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.1
+shader_param/uv_scale = Vector2( 3, 2 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = true
+shader_param/is_black = false
+shader_param/albedoTex = ExtResource( 12 )
+
+[sub_resource type="ShaderMaterial" id=27]
+shader = ExtResource( 4 )
+shader_param/snapRes = 32.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.1
+shader_param/uv_scale = Vector2( 3, 2 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = true
+shader_param/is_black = false
+shader_param/albedoTex = ExtResource( 13 )
+
+[sub_resource type="ShaderMaterial" id=28]
+shader = ExtResource( 4 )
+shader_param/snapRes = 32.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.1
+shader_param/uv_scale = Vector2( 3, 2 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = true
+shader_param/is_black = false
+shader_param/albedoTex = ExtResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=29]
+shader = ExtResource( 4 )
+shader_param/snapRes = 32.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.1
+shader_param/uv_scale = Vector2( 3, 2 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = true
+shader_param/is_black = false
+shader_param/albedoTex = ExtResource( 15 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 33 )
+anims/Win = SubResource( 34 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="AnimationPlayer"]
+environment = SubResource( 15 )
+
+[node name="GUI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GUI"]
+
+[node name="CenterContainer" type="CenterContainer" parent="GUI/CanvasLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_bottom = -5.0
+
+[node name="Sub1" type="Label" parent="GUI/CanvasLayer/CenterContainer"]
+margin_left = 227.0
+margin_top = 9.0
+margin_right = 413.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 18 )
+text = "MOUSE CLICK NEAR PEOPLE TO TALK"
+
+[node name="ColorRect" type="ColorRect" parent="GUI/CanvasLayer/CenterContainer/Sub1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Sub2" type="Label" parent="GUI/CanvasLayer/CenterContainer/Sub1"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 19 )
+text = "MOUSE CLICK NEAR PEOPLE TO TALK"
+
+[node name="Count" type="Label" parent="GUI/CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -57.0
+margin_top = 13.0
+custom_fonts/font = SubResource( 32 )
+
+[node name="Office" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -15.732
+autoplay = true
+
+[node name="Dream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -25.244
+autoplay = true
+
+[node name="EndSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = 3.059
+pitch_scale = 0.69
+
+[node name="DieSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = -10.487
+pitch_scale = 0.8
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 0.8, 0, -1, 0, -4.37114e-08, -0.0355889, -3.76708, -24.0738 )
+script = ExtResource( 1 )
+mouse_sensitivity = 22.5
+FOV = 35.0
+gravity = 25.0
+walk_speed = 2.5
+
+[node name="Head" type="Spatial" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.802241, 0 )
+
+[node name="Camera" type="Camera" parent="Player/Head"]
+transform = Transform( 1, 0, 0, 0, 1.25, 0, 0, 0, 1, 0, 0, 0 )
+fov = 90.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Player"]
+visible = false
+mesh = SubResource( 8 )
+skeleton = NodePath("../Head")
+
+[node name="Ground" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42.6369, 0, 0 )
+visible = false
+mesh = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="Ground"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="StudioNavigation" type="Navigation" parent="."]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="StudioNavigation"]
+navmesh = SubResource( 10 )
+
+[node name="Studio" parent="StudioNavigation/NavigationMeshInstance" instance=ExtResource( 6 )]
+
+[node name="Kitchen" parent="StudioNavigation/NavigationMeshInstance" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.02943, -4.68715, 6.82935 )
+
+[node name="WC" parent="StudioNavigation/NavigationMeshInstance" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.85, -3.104, -19.506 )
+
+[node name="LookDown" type="MeshInstance" parent="StudioNavigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16083, -3.14638, -24.0408 )
+mesh = SubResource( 30 )
+material/0 = SubResource( 31 )
+
+[node name="NPC1" type="KinematicBody" parent="StudioNavigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.23662, -3.70139, 4.63082 )
+script = ExtResource( 2 )
+texture = ExtResource( 9 )
+player_path = NodePath("../../Player")
+gui_path = NodePath("../../GUI")
+animation_path = NodePath("../../AnimationPlayer")
+env_path = NodePath("../../AnimationPlayer/WorldEnvironment")
+end_sound_path = NodePath("../../EndSound")
+die_sound_path = NodePath("../../DieSound")
+subtitles = "The career wasn't worth it./Now I have money, but who do I spend it on?/I don't feel anything anymore. No love, no pleasure, no hate./Only the void."
+
+[node name="MeshInstance" type="MeshInstance" parent="StudioNavigation/NPC1"]
+mesh = SubResource( 11 )
+material/0 = SubResource( 21 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC1"]
+shape = SubResource( 13 )
+
+[node name="NavigationAgent" type="NavigationAgent" parent="StudioNavigation/NPC1"]
+
+[node name="Area" type="Area" parent="StudioNavigation/NPC1"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC1/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.47227, 0, 0, 0 )
+shape = SubResource( 16 )
+
+[node name="NPC2" type="KinematicBody" parent="StudioNavigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7325, -1.68662, 12.1932 )
+script = ExtResource( 2 )
+texture = ExtResource( 3 )
+player_path = NodePath("../../Player")
+gui_path = NodePath("../../GUI")
+animation_path = NodePath("../../AnimationPlayer")
+env_path = NodePath("../../AnimationPlayer/WorldEnvironment")
+end_sound_path = NodePath("../../EndSound")
+die_sound_path = NodePath("../../DieSound")
+subtitles = "My little girl left me... I lived for her, we were one,/we were supposed to be together forever,/how dare she do this to me?!"
+
+[node name="MeshInstance" type="MeshInstance" parent="StudioNavigation/NPC2"]
+mesh = SubResource( 11 )
+material/0 = SubResource( 23 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC2"]
+shape = SubResource( 13 )
+
+[node name="NavigationAgent" type="NavigationAgent" parent="StudioNavigation/NPC2"]
+
+[node name="Area" type="Area" parent="StudioNavigation/NPC2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC2/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.79273, 0, 0, 0 )
+shape = SubResource( 16 )
+
+[node name="NPC3" type="KinematicBody" parent="StudioNavigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.42476, -3.72896, 8.42964 )
+script = ExtResource( 2 )
+texture = ExtResource( 10 )
+player_path = NodePath("../../Player")
+gui_path = NodePath("../../GUI")
+animation_path = NodePath("../../AnimationPlayer")
+env_path = NodePath("../../AnimationPlayer/WorldEnvironment")
+end_sound_path = NodePath("../../EndSound")
+die_sound_path = NodePath("../../DieSound")
+subtitles = "Katyusha, I'm for your own good, he's a drunkard, and he doesn't have a job./I don't like him, that's all./How can you raise your children if you're like a twig in the wind?/And how will I live alone without you?"
+
+[node name="MeshInstance" type="MeshInstance" parent="StudioNavigation/NPC3"]
+mesh = SubResource( 11 )
+material/0 = SubResource( 24 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC3"]
+shape = SubResource( 13 )
+
+[node name="Area" type="Area" parent="StudioNavigation/NPC3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC3/Area"]
+transform = Transform( 0.738433, 0, 0, 0, 1, 0, 0, 0, 1.32085, 0, 0, 0 )
+shape = SubResource( 16 )
+
+[node name="NavigationAgent" type="NavigationAgent" parent="StudioNavigation/NPC3"]
+
+[node name="NPC4" type="KinematicBody" parent="StudioNavigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13179, -3.70528, -17.7026 )
+script = ExtResource( 2 )
+texture = ExtResource( 11 )
+player_path = NodePath("../../Player")
+gui_path = NodePath("../../GUI")
+animation_path = NodePath("../../AnimationPlayer")
+env_path = NodePath("../../AnimationPlayer/WorldEnvironment")
+end_sound_path = NodePath("../../EndSound")
+die_sound_path = NodePath("../../DieSound")
+subtitles = "Listen to their regrets./What are they crying about?/What do they agonizingly want to change, where do they want to go back to and fix everything?/But you can't put things right only by starting fresh./Sorry, kid./As a man sows, so shall he reap."
+
+[node name="MeshInstance" type="MeshInstance" parent="StudioNavigation/NPC4"]
+mesh = SubResource( 11 )
+material/0 = SubResource( 25 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC4"]
+shape = SubResource( 13 )
+
+[node name="NavigationAgent" type="NavigationAgent" parent="StudioNavigation/NPC4"]
+
+[node name="Area" type="Area" parent="StudioNavigation/NPC4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC4/Area"]
+transform = Transform( 2.26636, 0, 0, 0, 1, 0, 0, 0, 1.73341, 0, 0, 0 )
+shape = SubResource( 16 )
+
+[node name="NPC5" type="KinematicBody" parent="StudioNavigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.8711, -3.51393, -10.213 )
+script = ExtResource( 2 )
+texture = ExtResource( 12 )
+player_path = NodePath("../../Player")
+gui_path = NodePath("../../GUI")
+animation_path = NodePath("../../AnimationPlayer")
+env_path = NodePath("../../AnimationPlayer/WorldEnvironment")
+end_sound_path = NodePath("../../EndSound")
+die_sound_path = NodePath("../../DieSound")
+subtitles = "Just yesterday it was 16, and today it's 23, why does it fly so fast?/Everything seems to be ahead, everything is fine,/but it's scary not to make it, to let them down, to disappoint them..."
+
+[node name="MeshInstance" type="MeshInstance" parent="StudioNavigation/NPC5"]
+mesh = SubResource( 11 )
+material/0 = SubResource( 26 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC5"]
+shape = SubResource( 13 )
+
+[node name="NavigationAgent" type="NavigationAgent" parent="StudioNavigation/NPC5"]
+
+[node name="Area" type="Area" parent="StudioNavigation/NPC5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC5/Area"]
+transform = Transform( 0.860248, 0, 0, 0, 1, 0, 0, 0, 1.69807, 0, 0, 0 )
+shape = SubResource( 16 )
+
+[node name="NPC6" type="KinematicBody" parent="StudioNavigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78535, -3.00315, -9.00853 )
+script = ExtResource( 2 )
+texture = ExtResource( 13 )
+player_path = NodePath("../../Player")
+gui_path = NodePath("../../GUI")
+animation_path = NodePath("../../AnimationPlayer")
+env_path = NodePath("../../AnimationPlayer/WorldEnvironment")
+end_sound_path = NodePath("../../EndSound")
+die_sound_path = NodePath("../../DieSound")
+subtitles = "From city to city, doing something, someone came, someone left, and what in the end?/No home, no friends, no enemies./And no one to grieve for me."
+
+[node name="MeshInstance" type="MeshInstance" parent="StudioNavigation/NPC6"]
+mesh = SubResource( 11 )
+material/0 = SubResource( 27 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC6"]
+shape = SubResource( 13 )
+
+[node name="NavigationAgent" type="NavigationAgent" parent="StudioNavigation/NPC6"]
+
+[node name="Area" type="Area" parent="StudioNavigation/NPC6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC6/Area"]
+transform = Transform( 1.61408, 0, 0, 0, 1, 0, 0, 0, 1.20032, 0, 0, 0 )
+shape = SubResource( 16 )
+
+[node name="NPC7" type="KinematicBody" parent="StudioNavigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.62514, -3.734, 7.06792 )
+script = ExtResource( 2 )
+texture = ExtResource( 14 )
+player_path = NodePath("../../Player")
+gui_path = NodePath("../../GUI")
+animation_path = NodePath("../../AnimationPlayer")
+env_path = NodePath("../../AnimationPlayer/WorldEnvironment")
+end_sound_path = NodePath("../../EndSound")
+die_sound_path = NodePath("../../DieSound")
+subtitles = "Mom, enough already! I don't care if it's him or the other one./I'll never have a baby like that again, you know?/I can't sleep in your bunk forever..."
+
+[node name="MeshInstance" type="MeshInstance" parent="StudioNavigation/NPC7"]
+mesh = SubResource( 11 )
+material/0 = SubResource( 28 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC7"]
+shape = SubResource( 13 )
+
+[node name="NavigationAgent" type="NavigationAgent" parent="StudioNavigation/NPC7"]
+
+[node name="Area" type="Area" parent="StudioNavigation/NPC7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC7/Area"]
+transform = Transform( 1.10936, 0, 0, 0, 1, 0, 0, 0, 0.61466, 0, 0, 0 )
+shape = SubResource( 16 )
+
+[node name="NPC8" type="KinematicBody" parent="StudioNavigation"]
+transform = Transform( 0.815672, 0, 0, 0, 0.73937, 0, 0, 0, 1, 3.0984, 2.04631, 13.2151 )
+script = ExtResource( 2 )
+texture = ExtResource( 15 )
+player_path = NodePath("../../Player")
+gui_path = NodePath("../../GUI")
+animation_path = NodePath("../../AnimationPlayer")
+env_path = NodePath("../../AnimationPlayer/WorldEnvironment")
+end_sound_path = NodePath("../../EndSound")
+die_sound_path = NodePath("../../DieSound")
+subtitles = "Mom is really going to kill me for a “F\" on my exam./Really kill me. I'm screwed./Better yourself, window and bye, I can't take it anymore..."
+
+[node name="MeshInstance" type="MeshInstance" parent="StudioNavigation/NPC8"]
+mesh = SubResource( 11 )
+material/0 = SubResource( 29 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC8"]
+shape = SubResource( 13 )
+
+[node name="NavigationAgent" type="NavigationAgent" parent="StudioNavigation/NPC8"]
+
+[node name="Area" type="Area" parent="StudioNavigation/NPC8"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StudioNavigation/NPC8/Area"]
+transform = Transform( 1.55581, 0, 0, 0, 1.90741, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 16 )

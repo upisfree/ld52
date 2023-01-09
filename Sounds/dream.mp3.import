@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dream.mp3-9b8b9f613d9db2a8af40b596bbd93859.mp3str"
+
+[deps]
+
+source_file="res://Sounds/dream.mp3"
+dest_files=[ "res://.import/dream.mp3-9b8b9f613d9db2a8af40b596bbd93859.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

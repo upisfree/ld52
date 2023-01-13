@@ -38,7 +38,6 @@ export(bool) var is_win = false
 
 # Called when the node enters the scene tree
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	cam.fov = FOV
 
 
@@ -64,6 +63,9 @@ func _physics_process(delta: float) -> void:
 
 # Called when there is an input event
 func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 	if event is InputEventMouseMotion:
 		mouse_axis = event.relative
 		camera_rotation()

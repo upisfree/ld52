@@ -70,8 +70,8 @@ func _input(event: InputEvent) -> void:
 		mouse_axis = event.relative
 		camera_rotation()
 		
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+	#if event.is_action_pressed("ui_cancel"):
+	#	get_tree().quit()
 
 func walk(delta: float) -> void:
 	direction_input()

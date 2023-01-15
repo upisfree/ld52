@@ -5,16 +5,13 @@ There is time to live and time to regret about ended live. In the end, we all mu
 
 Click people nearby to talk with them about their regrets about life. You need to find and talk with 9 people.
 
-WASD to walk
-
-Left click to talk
-
-ESC to exit game
-
-R to restart game
+* **WASD** to walk
+* **Left** click to talk
+* **ESC** to exit game
+* **R** to restart game
 
 ### Play
-[in browser](http://upisfr.ee/game/ld52/)
+[in browser](http://upisfr.ee/game/ld52/) or download for [Windows](https://github.com/upisfree/ld52/releases/download/1.1.0/ld52.exe), [macOS](https://github.com/upisfree/ld52/releases/download/1.1.0/ld52.dmg) or [Linux](https://github.com/upisfree/ld52/releases/download/1.1.0/ld52.linux.x86_64.zip). 
 
 ### Playthrough
 [![A Ludum Dare #52 game by Senya Pugach](http://img.youtube.com/vi/DEpq10m4Reg/0.jpg)](https://youtu.be/DEpq10m4Reg "Time to harvest regrets")

@@ -16,8 +16,11 @@ R to restart game
 ### Play
 [in browser](http://upisfr.ee/game/ld52/)
 
-### Trailer
-[![A Ludum Dare #52 game by Senya Pugach](http://img.youtube.com/vi/dNtrsi6e4YA/0.jpg)](http://www.youtube.com/watch?v=dNtrsi6e4YA "Crybaby")
-
 ### Playthrough
-[![A Ludum Dare #52 game by Senya Pugach](http://img.youtube.com/vi/dNtrsi6e4YA/0.jpg)](http://www.youtube.com/watch?v=dNtrsi6e4YA "Crybaby")
+[![A Ludum Dare #52 game by Senya Pugach](http://img.youtube.com/vi/DEpq10m4Reg/0.jpg)](https://youtu.be/DEpq10m4Reg "Time to harvest regrets")
+
+### Screenshots
+![](./Screenshots/1.jpg)
+![](./Screenshots/2.jpg)
+![](./Screenshots/3.jpg)
+![](./Screenshots/4.jpg)
